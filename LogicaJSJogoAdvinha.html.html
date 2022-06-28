@@ -1,0 +1,89 @@
+<meta charset="UTF-8">
+
+<body>
+<h1>Advinhe o número secreto</h1>
+<h2>o número está entre 1 e 10</h2>
+<input/>
+<button>Confirmar</button>
+
+<script>
+       //criei esse joguinho com o objetivo de treinar loop e array no JS;
+    function sorteia() {
+
+       return Math.round(Math.random() * 10);
+       
+    }
+
+    function sorteiaNumeros(quantidade) {
+
+        let segredos = [];
+
+        let numero = 1;
+
+        while(numero <= quantidade) {
+
+              let numeroAleatorio = sorteia();
+              let achou = false;
+
+              if (numeroAleatorio !== 0) {
+                     for(let posicao = 0; posicao < segredos.length; posicao++) {
+
+                           if(segredos[posicao] == numeroAleatorio){
+                                achou = true;
+                                break;
+                           }
+
+                     }
+
+                     if (achou == false) {
+                           segredos.push(numeroAleatorio);
+                           numero++;
+                     }
+              }
+
+        }
+
+        return segredos;
+
+    }
+
+    let segredos = sorteiaNumeros(3);
+//coloquei a possibilidade de vir 3 numeros entre 1 e 10 para aumentar as chances e diminuir a repetição;
+    console.log(segredos);
+
+    let input = document.querySelector("input");
+    input.focus();
+
+    function verifica() {
+
+       let achou = false;
+
+       for(let posicao = 0; posicao < segredos.length; posicao++) {
+
+              if(input.value == segredos[posicao]) {
+
+                     alert("Você ACERTOU!");
+                     achou = true;
+                     break;
+              } 
+       }
+
+       if(achou == false) {
+
+              alert("Você ERROU!");
+       }
+
+       input.value = "";
+       input.focus();
+
+    }
+
+    let button = document.querySelector("button");
+
+    button.onclick = verifica;
+
+
+</script>
+
+
+</body>
